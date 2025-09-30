@@ -1,160 +1,138 @@
-
 <!DOCTYPE html>
-<html lang="vi">
+<html>
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Times New Roman', serif;
-      background-color: #f5f5dc;
-      background-image: radial-gradient(#ffcccc 1px, transparent 1px);
-      background-size: 20px 20px;
-      color: #333;
-      overflow: hidden;
-      position: relative;
-      min-height: 100vh;
-    }
-
-    /* Lớp ảnh rơi nằm giữa nền và nội dung */
-    .falling-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .falling-photo {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 15px;
-      animation: fall linear infinite;
-      animation-fill-mode: forwards;
-      opacity: 0;
-    }
-
+    /* KEYFRAMES CHO HIỆU ỨNG RƠI NGẪU NHIÊN */
     @keyframes fall {
       0% {
-        transform: translateY(-100%) translateX(var(--x)) rotate(var(--r));
+        transform: translateY(-100%) translateX(var(--initial-x)) rotate(var(--initial-rotate));
         opacity: 0;
       }
       10% {
-        opacity: 1;
+        opacity: 0.8; 
       }
       90% {
-        opacity: 1;
+        opacity: 0.8;
       }
       100% {
-        transform: translateY(100vh) translateX(var(--x-end)) rotate(var(--r-end));
+        transform: translateY(100vh) translateX(var(--final-x)) rotate(var(--final-rotate));
         opacity: 0;
       }
     }
 
-    /* Chỉ rơi bên trái: left từ 0% đến 45% */
-    #photo1 { left: 5%; --x: 0px; --x-end: 20px; --r: 10deg; --r-end: 30deg; animation-duration: 28s; animation-delay: 0s; }
-    #photo2 { left: 15%; --x: -20px; --x-end: -10px; --r: -15deg; --r-end: 10deg; animation-duration: 30s; animation-delay: 5s; }
-    #photo3 { left: 25%; --x: 15px; --x-end: 25px; --r: 5deg; --r-end: -5deg; animation-duration: 32s; animation-delay: 10s; }
-    #photo4 { left: 35%; --x: -10px; --x-end: -30px; --r: 20deg; --r-end: 25deg; animation-duration: 34s; animation-delay: 15s; }
-    #photo5 { left: 45%; --x: -25px; --x-end: -10px; --r: -25deg; --r-end: -20deg; animation-duration: 36s; animation-delay: 20s; }
-
-    .content-wrapper {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+    /* CSS CHÍNH & TỐI ƯU DI ĐỘNG */
+    body {
+      font-family: 'Times New Roman', serif;
+      color: #333;
       text-align: center;
-      z-index: 10;
-    }
-
-    h1 {
-      color: #c00000;
-      font-size: 2em;
-      margin: 0;
-      white-space: nowrap;
-    }
-
-    .video-container {
       position: relative;
-      width: 100%;
-      max-width: 100%;
-      margin-top: 15px;
-      padding: 12px;
-      box-sizing: border-box;
-      border: 3px solid #c00000;
-      border-radius: 20px;
-      background-color: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      min-height: 100vh;
+      overflow: hidden; 
+      margin: 0;
+      padding: 0;
+
+      /* Nền màu be với ren trái tim */
+      background-color: #fce8e8; /* Màu hồng nhạt */
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+      background-size: 60px 60px, 60px 60px; 
+      background-position: 0 0, 30px 30px; 
+      
+      /* CĂN GIỮA TOÀN BỘ TRANG */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* Giữ video ở phía trên */
     }
 
-    .video-container::before,
-    .video-container::after {
-      content: "🌹";
-      font-size: 30px;
-      position: absolute;
-      z-index: 20;
+    /* KHỐI CHỨA VIDEO: Đảm bảo video nằm ở phía trên */
+    .video-wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding-top: 5vh; /* Đẩy video xuống một chút từ đỉnh trang */
+        z-index: 10;
+        position: relative;
     }
 
-    .video-container::before {
-      top: -10px;
-      left: -10px;
+    /* KHUNG VIỀN CỦA VIDEO (Chỉ còn hoa hồng ở góc) */
+    .video-container {
+      display: inline-block;
+      padding: 15px; 
+      border: 4px solid #f778a8; /* Viền màu hồng đậm */
+      border-radius: 15px; 
+      background-color: #ffffff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      position: relative;
+      max-width: 95%; 
+      z-index: 10; 
     }
-
-    .video-container::after {
-      bottom: -10px;
-      right: -10px;
+    
+    /* STICKER HOA HỒNG (Giữ nguyên) */
+    .video-container::before, .video-container::after {
+        content: "🌹";
+        font-size: 25px; 
+        position: absolute;
+        z-index: 20;
     }
-
-    .leaf-top {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      font-size: 30px;
-    }
-
-    .leaf-bottom {
-      position: absolute;
-      bottom: -10px;
-      left: -10px;
-      font-size: 30px;
-    }
+    .video-container::before { top: 0; left: 0; transform: translate(-50%, -50%); }
+    .video-container::after { bottom: 0; right: 0; transform: translate(50%, 50%); }
+    
+    /* ĐÃ LOẠI BỎ CSS CHO .heart-top */
 
     video {
-      width: 100%;
+      width: 100%; 
+      height: auto;
       border-radius: 10px;
       display: block;
+    }
+
+    /* HIỆU ỨNG ẢNH RƠI (300px) */
+    .falling-photo {
+      position: fixed; 
+      width: 300px; 
+      height: 300px;
+      border-radius: 5px;
+      object-fit: cover;
+      opacity: 0;
+      animation-name: fall;
+      animation-iteration-count: infinite;
+      z-index: 5; 
+    }
+
+    /* THIẾT LẬP RƠI CHẬM VÀ XEN KẼ CHO 5 ẢNH */
+    #photo1 { --initial-x: 20px; --initial-rotate: 10deg; --final-x: 30px; --final-rotate: 30deg; left: 5%; animation-duration: 25s; animation-delay: 0s; } 
+    #photo2 { --initial-x: -10px; --initial-rotate: 15deg; --final-x: -20px; --final-rotate: -10deg; left: 25%; animation-duration: 30s; animation-delay: 5s; } 
+    #photo3 { --initial-x: 15px; --initial-rotate: 10deg; --final-x: 25px; --final-rotate: 5deg; left: 50%; animation-duration: 26s; animation-delay: 10s; } 
+    #photo4 { --initial-x: -5px; --initial-rotate: 20deg; --final-x: -30px; --final-rotate: 25deg; left: 70%; animation-duration: 29s; animation-delay: 15s; } 
+    #photo5 { --initial-x: -25px; --initial-rotate: 25deg; --final-x: -10px; --final-rotate: -20deg; left: 90%; animation-duration: 28s; animation-delay: 20s; } 
+    
+    /* MEDIA QUERY: Giảm kích thước ảnh rơi trên điện thoại */
+    @media (max-width: 600px) {
+        .falling-photo {
+            width: 150px; 
+            height: 150px;
+        }
     }
   </style>
 </head>
 <body>
-  <!-- Lớp ảnh rơi -->
-  <div class="falling-layer">
-    <img src="anh2.jpg" alt="Ảnh 2" class="falling-photo" id="photo1">
-    <img src="anh3.jpg" alt="Ảnh 3" class="falling-photo" id="photo2">
-    <img src="anh15.jpg" alt="Ảnh 15" class="falling-photo" id="photo3">
-    <img src="anh18.jpg" alt="Ảnh 18" class="falling-photo" id="photo4">
-    <img src="anh24.jpg" alt="Ảnh 24" class="falling-photo" id="photo5">
+  
+  <div class="video-wrapper">
+      <div class="video-container">
+        <video controls autoplay loop>
+          <source src="MWD chú rể.mp4" type="video/mp4">
+          Trình duyệt của bạn không hỗ trợ thẻ video.
+        </video>
+      </div>
   </div>
 
-  <!-- Nội dung chính -->
-  <div class="content-wrapper">
-
-    <div class="video-container">
-      <span class="leaf-top">🌿</span>
-      <span class="leaf-bottom">🌿</span>
-      <video controls>
-        <source src="MWD chú rể.mp4" type="video/mp4">
-        Trình duyệt của bạn không hỗ trợ thẻ video.
-      </video>
-    </div>
-  </div>
+  <img src="anh2.jpg" alt="Photo 2" class="falling-photo" id="photo1">
+  <img src="anh3.jpg" alt="Photo 3" class="falling-photo" id="photo2">
+  <img src="anh15.jpg" alt="Photo 15" class="falling-photo" id="photo3">
+  <img src="anh18.jpg" alt="Photo 18" class="falling-photo" id="photo4">
+  <img src="anh24.jpg" alt="Photo 24" class="falling-photo" id="photo5">
 </body>
 </html>
