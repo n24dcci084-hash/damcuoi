@@ -102,11 +102,11 @@
 
     /* CÀI ĐẶT RƠI TUẦN TỰ VÀ CHẬM HƠN (Độ dài Animation = 45s, Độ trễ giữa các ảnh = 9s) */
     /* 9s x 5 ảnh = 45s (đúng bằng thời gian rơi) => Rơi lặp lại hoàn hảo */
-    #photo1 { --initial-x: -100px; --initial-rotate: 10deg; --final-x: 100px; --final-rotate: 30deg; animation-duration: 45s; animation-delay: 0s; left: 10%; } 
-    #photo2 { --initial-x: 50px; --initial-rotate: 15deg; --final-x: -50px; --final-rotate: -10deg; animation-duration: 45s; animation-delay: 9s; left: 30%; } 
-    #photo3 { --initial-x: -70px; --initial-rotate: -5deg; --final-x: 70px; --final-rotate: 20deg; animation-duration: 45s; animation-delay: 18s; left: 50%; } 
-    #photo4 { --initial-x: 30px; --initial-rotate: 25deg; --final-x: -30px; --final-rotate: -20deg; animation-duration: 45s; animation-delay: 27s; left: 70%; } 
-    #photo5 { --initial-x: -90px; --initial-rotate: 10deg; --final-x: 90px; --final-rotate: 5deg; animation-duration: 45s; animation-delay: 36s; left: 90%; } 
+   #photo1 { --initial-x: 20px; --initial-rotate: 10deg; --final-x: 30px; --final-rotate: 30deg; left: 10%; animation-duration: 25s; animation-delay: 0s; } 
+    #photo2 { --initial-x: -10px; --initial-rotate: 15deg; --final-x: -20px; --final-rotate: -10deg; left: 30%; animation-duration: 30s; animation-delay: 5s; } 
+    #photo3 { --initial-x: 15px; --initial-rotate: 10deg; --final-x: 25px; --final-rotate: 5deg; left: 50%; animation-duration: 26s; animation-delay: 10s; } 
+    #photo4 { --initial-x: -5px; --initial-rotate: 20deg; --final-x: -30px; --final-rotate: 25deg; left: 70%; animation-duration: 29s; animation-delay: 15s; } 
+    #photo5 { --initial-x: -25px; --initial-rotate: 25deg; --final-x: -10px; --final-rotate: -20deg; left: 90%; animation-duration: 28s; animation-delay: 20s; } 
     
     /* MEDIA QUERY: Giảm kích thước ảnh rơi trên điện thoại, đồng thời giữ ảnh trong khung hình */
     @media (max-width: 600px) {
