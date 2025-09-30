@@ -1,13 +1,10 @@
-
-
 <!DOCTYPE html>
 <html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <style>
+  <title></title> <style>
     body {
       margin: 0;
       padding: 0;
@@ -24,8 +21,8 @@
       min-height: 100vh;
     }
 
-    body::before {
-      content: '';
+    /* Đã xoá khối body::before { content: ''; } */
+
     /* Lớp ảnh rơi nằm giữa nền và nội dung */
     .falling-layer {
       position: absolute;
@@ -84,17 +81,8 @@
       z-index: 10;
     }
 
-    h1 {
-      color: #e91e63;
-      font-size: 4em;
-      margin-top: 0;
-      margin-bottom: 5px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-      color: #c00000;
-      font-size: 1.6em;
-      margin: 0;
-      white-space: nowrap;
-    }
+    /* Đã xoá khối h1 CSS */
+    
     .video-container {
       position: relative;
       width: 100%;
@@ -108,10 +96,8 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
-    p {
-      color: #880e4f;
-      font-size: 1.8em;
-      margin-bottom: 30px;
+    /* Đã xoá khối p CSS */
+    
     .video-container::before,
     .video-container::after {
       content: "🌹";
@@ -152,12 +138,11 @@
     }
   </style>
 </head>
-  
+<body>
   <video controls>
     <source src="MWD chú rể.mp4" type="video/mp4">
     Trình duyệt của bạn không hỗ trợ thẻ video.
   </video>
-  <!-- Lớp ảnh rơi -->
   <div class="falling-layer">
     <img src="anh2.jpg" alt="Ảnh 2" class="falling-photo" id="photo1">
     <img src="anh3.jpg" alt="Ảnh 3" class="falling-photo" id="photo2">
@@ -165,8 +150,7 @@
     <img src="anh18.jpg" alt="Ảnh 18" class="falling-photo" id="photo4">
     <img src="anh24.jpg" alt="Ảnh 24" class="falling-photo" id="photo5">
   </div>
-  <!-- Nội dung chính -->
-  
+  <div class="content-wrapper">
     <div class="video-container">
       <span class="leaf-top">🌿</span>
       <span class="leaf-bottom">🌿</span>
@@ -177,4 +161,5 @@
     </div>
   </div>
 </body>
-  </html>
+</html>
+  
