@@ -1,136 +1,180 @@
+
+
 <!DOCTYPE html>
 <html>
+<html lang="vi">
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Kỷ Niệm</title>
+  
   <style>
-    /* KEYFRAMES CHO HIỆU ỨNG RƠI THẲNG ĐỨNG, KHÔNG XOAY */
-    @keyframes fall {
-      0% {
-        transform: translateY(-100%);
-        opacity: 0;
-      }
-      1% {
-        opacity: 0.8; 
-      }
-      99% {
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-    }
-
-    /* CSS CHÍNH */
     body {
-      font-family: 'Times New Roman', serif;
-      color: #333;
-      text-align: center;
-      position: relative;
-      min-height: 100vh;
-      overflow: hidden; 
       margin: 0;
       padding: 0;
-      background-color: #fcf8f3; /* Màu be sữa */
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
-    /* KHỐI CHỨA VIDEO: Tăng z-index để đảm bảo nằm trên ảnh rơi */
-    .video-wrapper {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        padding-top: 5vh; 
-        z-index: 15; /* ĐẢM BẢO NẰM TRÊN ẢNH RƠI (z-index 5) */
-        position: relative;
-    }
-
-    /* KHUNG VIỀN CỦA VIDEO (Màu nâu) */
-    .video-container {
-      display: inline-block;
-      padding: 15px; 
-      border: 4px solid #8B4513; 
-      border-radius: 15px; 
-      background-color: #ffffff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      font-family: 'Times New Roman', serif;
+      background-color: #ffeef2;
+      background-color: #f5f5dc;
+      background-image: radial-gradient(#ffcccc 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: #333;
+      text-align: center;
+      padding-top: 50px;
+      overflow: hidden;
       position: relative;
-      max-width: 95%; 
-      z-index: 15; 
+      min-height: 100vh;
     }
-    
-    /* STICKER HOA HỒNG */
-    .video-container::before, .video-container::after {
-        content: "🌹";
-        font-size: 25px; 
-        position: absolute;
-        z-index: 20;
+
+    body::before {
+      content: '';
+    /* Lớp ảnh rơi nằm giữa nền và nội dung */
+    .falling-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ffc0cb" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C15.09 3.81 16.76 3 18.5 3 21.58 3 24 5.42 24 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+      background-repeat: repeat;
+      background-size: 80px 80px;
+      opacity: 0.1;
+      z-index: -1;
+      z-index: 5;
+      pointer-events: none;
     }
-    .video-container::before { top: 0; left: 0; transform: translate(-50%, -50%); }
-    .video-container::after { bottom: 0; right: 0; transform: translate(50%, 50%); }
-    
+    .falling-photo {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      animation: fall linear infinite;
+      animation-fill-mode: forwards;
+      opacity: 0;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-100%) translateX(var(--x)) rotate(var(--r));
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) translateX(var(--x-end)) rotate(var(--r-end));
+        opacity: 0;
+      }
+    }
+    /* Chỉ rơi bên trái: left từ 0% đến 45% */
+    #photo1 { left: 5%; --x: 0px; --x-end: 20px; --r: 10deg; --r-end: 30deg; animation-duration: 28s; animation-delay: 0s; }
+    #photo2 { left: 15%; --x: -20px; --x-end: -10px; --r: -15deg; --r-end: 10deg; animation-duration: 30s; animation-delay: 5s; }
+    #photo3 { left: 25%; --x: 15px; --x-end: 25px; --r: 5deg; --r-end: -5deg; animation-duration: 32s; animation-delay: 10s; }
+    #photo4 { left: 35%; --x: -10px; --x-end: -30px; --r: 20deg; --r-end: 25deg; animation-duration: 34s; animation-delay: 15s; }
+    #photo5 { left: 45%; --x: -25px; --x-end: -10px; --r: -25deg; --r-end: -20deg; animation-duration: 36s; animation-delay: 20s; }
+    .content-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      z-index: 10;
+    }
+
+    h1 {
+      color: #e91e63;
+      font-size: 4em;
+      margin-top: 0;
+      margin-bottom: 5px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      color: #c00000;
+      font-size: 1.6em;
+      margin: 0;
+      white-space: nowrap;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      box-sizing: border-box;
+      border: 3px solid #c00000;
+      border-radius: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    p {
+      color: #880e4f;
+      font-size: 1.8em;
+      margin-bottom: 30px;
+    .video-container::before,
+    .video-container::after {
+      content: "🌹";
+      font-size: 30px;
+      position: absolute;
+      z-index: 20;
+    }
+    .video-container::before {
+      top: -10px;
+      left: -10px;
+    }
+    .video-container::after {
+      bottom: -10px;
+      right: -10px;
+    }
+    .leaf-top {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 30px;
+    }
+    .leaf-bottom {
+      position: absolute;
+      bottom: -10px;
+      left: -10px;
+      font-size: 30px;
+    }
+
     video {
-      width: 100%; 
+      border: 5px solid #ff80ab;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      max-width: 90%;
       height: auto;
+      width: 100%;
       border-radius: 10px;
       display: block;
     }
-
-    /* HIỆU ỨNG ẢNH RƠI (300px, Thẳng đều, Tuần tự) */
-    .falling-photo {
-      position: fixed; 
-      width: 300px; 
-      height: 300px;
-      border-radius: 5px;
-      object-fit: cover;
-      opacity: 0;
-      animation-name: fall;
-      animation-iteration-count: infinite;
-      z-index: 5; /* ĐẢM BẢO NẰM SAU VIDEO (z-index 15) */
-      
-      /* Căn chỉnh chính giữa theo chiều ngang */
-      left: 0;
-      right: 0;
-      margin-left: auto;
-      margin-right: auto;
-
-      animation-timing-function: linear; /* Rơi thẳng đều */
-    }
-
-    /* CÀI ĐẶT VỊ TRÍ VÀ THỜI GIAN RƠI */
-    #photo1 { animation-duration: 45s; animation-delay: 0s; left: calc(50% - 400px); } 
-    #photo2 { animation-duration: 45s; animation-delay: 9s; left: calc(50% - 200px); } 
-    #photo3 { animation-duration: 45s; animation-delay: 18s; left: calc(50% - 100px); } 
-    #photo4 { animation-duration: 45s; animation-delay: 27s; left: calc(50% + 100px); } 
-    #photo5 { animation-duration: 45s; animation-delay: 36s; left: calc(50% + 200px); } 
-    
-    /* MEDIA QUERY: Điều chỉnh lại vị trí ngang cho điện thoại (màn hình hẹp) */
-    @media (max-width: 600px) {
-        #photo1 { left: calc(50% - 250px); } 
-        #photo2 { left: calc(50% - 150px); } 
-        #photo3 { left: calc(50% - 50px); } 
-        #photo4 { left: calc(50% + 50px); } 
-        #photo5 { left: calc(50% + 150px); } 
-    }
   </style>
 </head>
-<body>
   
-  <div class="video-wrapper">
-      <div class="video-container">
-        <video controls autoplay loop>
-          <source src="MWD chú rể.mp4" type="video/mp4">
-          Trình duyệt của bạn không hỗ trợ thẻ video.
-        </video>
-      </div>
+  <video controls>
+    <source src="MWD chú rể.mp4" type="video/mp4">
+    Trình duyệt của bạn không hỗ trợ thẻ video.
+  </video>
+  <!-- Lớp ảnh rơi -->
+  <div class="falling-layer">
+    <img src="anh2.jpg" alt="Ảnh 2" class="falling-photo" id="photo1">
+    <img src="anh3.jpg" alt="Ảnh 3" class="falling-photo" id="photo2">
+    <img src="anh15.jpg" alt="Ảnh 15" class="falling-photo" id="photo3">
+    <img src="anh18.jpg" alt="Ảnh 18" class="falling-photo" id="photo4">
+    <img src="anh24.jpg" alt="Ảnh 24" class="falling-photo" id="photo5">
   </div>
-
-  <img src="anh2.jpg" alt="Photo 2" class="falling-photo" id="photo1">
-  <img src="anh3.jpg" alt="Photo 3" class="falling-photo" id="photo2">
-  <img src="anh15.jpg" alt="Photo 15" class="falling-photo" id="photo3">
-  <img src="anh18.jpg" alt="Photo 18" class="falling-photo" id="photo4">
-  <img src="anh24.jpg" alt="Photo 24" class="falling-photo" id="photo5">
+  <!-- Nội dung chính -->
+  
+    <div class="video-container">
+      <span class="leaf-top">🌿</span>
+      <span class="leaf-bottom">🌿</span>
+      <video controls>
+        <source src="MWD chú rể.mp4" type="video/mp4">
+        Trình duyệt của bạn không hỗ trợ thẻ video.
+      </video>
+    </div>
+  </div>
 </body>
-</html>
+  </html>
