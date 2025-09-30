@@ -2,12 +2,12 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <title>Video Kỷ Niệm</title>
   <style>
-    /* KEYFRAMES CHO HIỆU ỨNG RƠI NGẪU NHIÊN */
+    /* KEYFRAMES CHO HIỆU ỨNG RƠI THẲNG ĐỨNG, KHÔNG XOAY */
     @keyframes fall {
       0% {
-        transform: translateY(-100%) translateX(var(--initial-x)) rotate(var(--initial-rotate));
+        transform: translateY(-100%);
         opacity: 0;
       }
       1% {
@@ -17,12 +17,12 @@
         opacity: 0.8;
       }
       100% {
-        transform: translateY(100vh) translateX(var(--final-x)) rotate(var(--final-rotate));
+        transform: translateY(100vh);
         opacity: 0;
       }
     }
 
-    /* CSS CHÍNH & TỐI ƯU DI ĐỘNG */
+    /* CSS CHÍNH */
     body {
       font-family: 'Times New Roman', serif;
       color: #333;
@@ -32,23 +32,19 @@
       overflow: hidden; 
       margin: 0;
       padding: 0;
-
-      /* Nền màu be (sữa) thuần túy */
-      background-color: #fcf8f3; 
-      
-      /* CĂN GIỮA TOÀN BỘ TRANG */
+      background-color: #fcf8f3; /* Màu be sữa */
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* Giữ video ở phía trên */
+      align-items: flex-start;
     }
 
-    /* KHỐI CHỨA VIDEO: Đảm bảo video nằm ở phía trên */
+    /* KHỐI CHỨA VIDEO: Tăng z-index để đảm bảo nằm trên ảnh rơi */
     .video-wrapper {
         display: flex;
         justify-content: center;
         width: 100%;
         padding-top: 5vh; 
-        z-index: 10;
+        z-index: 15; /* ĐẢM BẢO NẰM TRÊN ẢNH RƠI (z-index 5) */
         position: relative;
     }
 
@@ -56,13 +52,13 @@
     .video-container {
       display: inline-block;
       padding: 15px; 
-      border: 4px solid #8B4513; /* Viền màu nâu */
+      border: 4px solid #8B4513; 
       border-radius: 15px; 
       background-color: #ffffff;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
       position: relative;
       max-width: 95%; 
-      z-index: 10; 
+      z-index: 15; 
     }
     
     /* STICKER HOA HỒNG */
@@ -85,7 +81,6 @@
     /* HIỆU ỨNG ẢNH RƠI (300px, Thẳng đều, Tuần tự) */
     .falling-photo {
       position: fixed; 
-      /* GIỮ NGUYÊN KÍCH THƯỚC 300PX */
       width: 300px; 
       height: 300px;
       border-radius: 5px;
@@ -93,20 +88,32 @@
       opacity: 0;
       animation-name: fall;
       animation-iteration-count: infinite;
-      z-index: 5; 
+      z-index: 5; /* ĐẢM BẢO NẰM SAU VIDEO (z-index 15) */
+      
+      /* Căn chỉnh chính giữa theo chiều ngang */
+      left: 0;
+      right: 0;
       margin-left: auto;
       margin-right: auto;
+
       animation-timing-function: linear; /* Rơi thẳng đều */
     }
 
-    /* CÀI ĐẶT VỊ TRÍ VÀ THỜI GIAN RƠI (Điều chỉnh left để giữ ảnh 300px trong khung hình di động) */
-    #photo1 { --initial-x: -100px; --initial-rotate: 10deg; --final-x: 100px; --final-rotate: 30deg; animation-duration: 45s; animation-delay: 0s; left: 0%; } 
-    #photo2 { --initial-x: 50px; --initial-rotate: 15deg; --final-x: -50px; --final-rotate: -10deg; animation-duration: 45s; animation-delay: 9s; left: 20%; } 
-    #photo3 { --initial-x: -70px; --initial-rotate: -5deg; --final-x: 70px; --final-rotate: 20deg; animation-duration: 45s; animation-delay: 18s; left: 40%; } 
-    #photo4 { --initial-x: 30px; --initial-rotate: 25deg; --final-x: -30px; --final-rotate: -20deg; animation-duration: 45s; animation-delay: 27s; left: 60%; } 
-    #photo5 { --initial-x: -90px; --initial-rotate: 10deg; --final-x: 90px; --final-rotate: 5deg; animation-duration: 45s; animation-delay: 36s; left: 80%; } 
+    /* CÀI ĐẶT VỊ TRÍ VÀ THỜI GIAN RƠI */
+    #photo1 { animation-duration: 45s; animation-delay: 0s; left: calc(50% - 400px); } 
+    #photo2 { animation-duration: 45s; animation-delay: 9s; left: calc(50% - 200px); } 
+    #photo3 { animation-duration: 45s; animation-delay: 18s; left: calc(50% - 100px); } 
+    #photo4 { animation-duration: 45s; animation-delay: 27s; left: calc(50% + 100px); } 
+    #photo5 { animation-duration: 45s; animation-delay: 36s; left: calc(50% + 200px); } 
     
-    /* ĐÃ BỎ MEDIA QUERY GIẢM KÍCH THƯỚC ẢNH */
+    /* MEDIA QUERY: Điều chỉnh lại vị trí ngang cho điện thoại (màn hình hẹp) */
+    @media (max-width: 600px) {
+        #photo1 { left: calc(50% - 250px); } 
+        #photo2 { left: calc(50% - 150px); } 
+        #photo3 { left: calc(50% - 50px); } 
+        #photo4 { left: calc(50% + 50px); } 
+        #photo5 { left: calc(50% + 150px); } 
+    }
   </style>
 </head>
 <body>
