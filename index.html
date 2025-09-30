@@ -2,12 +2,11 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Kỷ Niệm</title>
+
   <style>
     /* KEYFRAMES CHO HIỆU ỨNG RƠI NGẪU NHIÊN */
     @keyframes fall {
       0% {
-        /* Bắt đầu ở trên cùng màn hình (Y: -100%) */
         transform: translateY(-100%) translateX(var(--initial-x)) rotate(var(--initial-rotate));
         opacity: 0;
       }
@@ -18,7 +17,6 @@
         opacity: 0.8;
       }
       100% {
-        /* Rơi xuống dưới cùng màn hình (Y: 100vh) */
         transform: translateY(100vh) translateX(var(--final-x)) rotate(var(--final-rotate));
         opacity: 0;
       }
@@ -36,7 +34,7 @@
       padding: 0;
 
       /* Nền màu be (sữa) thuần túy */
-      background-color: #fcf8f3; /* Màu be sữa */
+      background-color: #fcf8f3; 
       
       /* CĂN GIỮA TOÀN BỘ TRANG */
       display: flex;
@@ -49,7 +47,7 @@
         display: flex;
         justify-content: center;
         width: 100%;
-        padding-top: 5vh; /* Đẩy video xuống một chút từ đỉnh trang */
+        padding-top: 5vh; 
         z-index: 10;
         position: relative;
     }
@@ -84,43 +82,31 @@
       display: block;
     }
 
-    /* HIỆU ỨNG ẢNH RƠI (Chậm hơn, tuần tự) */
+    /* HIỆU ỨNG ẢNH RƠI (300px, Thẳng đều, Tuần tự) */
     .falling-photo {
       position: fixed; 
-      width: 400px; 
-      height: 400px;
+      /* GIỮ NGUYÊN KÍCH THƯỚC 300PX */
+      width: 300px; 
+      height: 300px;
       border-radius: 5px;
       object-fit: cover;
       opacity: 0;
       animation-name: fall;
       animation-iteration-count: infinite;
       z-index: 5; 
-      /* Thiết lập cho việc căn chỉnh ngang */
       margin-left: auto;
       margin-right: auto;
+      animation-timing-function: linear; /* Rơi thẳng đều */
     }
 
-    /* CÀI ĐẶT RƠI TUẦN TỰ VÀ CHẬM HƠN (Độ dài Animation = 45s, Độ trễ giữa các ảnh = 9s) */
-    /* 9s x 5 ảnh = 45s (đúng bằng thời gian rơi) => Rơi lặp lại hoàn hảo */
-   #photo1 { --initial-x: -100px; --initial-rotate: 10deg; --final-x: 100px; --final-rotate: 30deg; animation-duration: 45s; animation-delay: 0s; left: 10%; } 
-    #photo2 { --initial-x: 50px; --initial-rotate: 15deg; --final-x: -50px; --final-rotate: -10deg; animation-duration: 45s; animation-delay: 9s; left: 30%; } 
-    #photo3 { --initial-x: -70px; --initial-rotate: -5deg; --final-x: 70px; --final-rotate: 20deg; animation-duration: 45s; animation-delay: 18s; left: 50%; } 
-    #photo4 { --initial-x: 30px; --initial-rotate: 25deg; --final-x: -30px; --final-rotate: -20deg; animation-duration: 45s; animation-delay: 27s; left: 70%; } 
-    #photo5 { --initial-x: -90px; --initial-rotate: 10deg; --final-x: 90px; --final-rotate: 5deg; animation-duration: 45s; animation-delay: 36s; left: 90%; } 
+    /* CÀI ĐẶT VỊ TRÍ VÀ THỜI GIAN RƠI (Điều chỉnh left để giữ ảnh 300px trong khung hình di động) */
+    #photo1 { --initial-x: -100px; --initial-rotate: 10deg; --final-x: 100px; --final-rotate: 30deg; animation-duration: 45s; animation-delay: 0s; left: 0%; } 
+    #photo2 { --initial-x: 50px; --initial-rotate: 15deg; --final-x: -50px; --final-rotate: -10deg; animation-duration: 45s; animation-delay: 9s; left: 20%; } 
+    #photo3 { --initial-x: -70px; --initial-rotate: -5deg; --final-x: 70px; --final-rotate: 20deg; animation-duration: 45s; animation-delay: 18s; left: 40%; } 
+    #photo4 { --initial-x: 30px; --initial-rotate: 25deg; --final-x: -30px; --final-rotate: -20deg; animation-duration: 45s; animation-delay: 27s; left: 60%; } 
+    #photo5 { --initial-x: -90px; --initial-rotate: 10deg; --final-x: 90px; --final-rotate: 5deg; animation-duration: 45s; animation-delay: 36s; left: 80%; } 
     
-    /* MEDIA QUERY: Giảm kích thước ảnh rơi trên điện thoại, đồng thời giữ ảnh trong khung hình */
-    @media (max-width: 600px) {
-        .falling-photo {
-            width: 200px; 
-            height: 200px;
-        }
-        /* Điều chỉnh lại vị trí ngang (left) cho ảnh rơi trên di động */
-        #photo1 { left: 2%; } 
-        #photo2 { left: 22%; } 
-        #photo3 { left: 42%; } 
-        #photo4 { left: 62%; } 
-        #photo5 { left: 82%; } 
-    }
+    /* ĐÃ BỎ MEDIA QUERY GIẢM KÍCH THƯỚC ẢNH */
   </style>
 </head>
 <body>
