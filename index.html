@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* CĂN GIỮA VIDEO */
+    body {
+      background-color: #f5f5dc; /* Màu nền nhạt */
+      display: flex;
+      justify-content: center; /* Căn giữa ngang */
+      align-items: center; /* Căn giữa dọc */
+      min-height: 100vh; /* Chiếm toàn bộ chiều cao màn hình */
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Ngăn cuộn nếu video hơi lớn */
+    }
+
+    /* ĐỊNH DẠNG VIDEO */
+    video {
+      max-width: 90%; /* Chiếm tối đa 90% chiều rộng màn hình */
+      max-height: 90vh; /* Chiếm tối đa 90% chiều cao màn hình */
+      width: auto;
+      height: auto;
+      border-radius: 5px; /* Bo góc video */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Thêm bóng mờ nhẹ */
+    }
+  </style>
+</head>
+<body>
+  
+  <video controls autoplay loop>
+    <source src="MWD chú rể.mp4" type="video/mp4">
+    Trình duyệt của bạn không hỗ trợ thẻ video.
+  </video>
+  
+</body>
+</html>
